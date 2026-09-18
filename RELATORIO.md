@@ -223,6 +223,10 @@ curl http://localhost:8000/notas
 
 A nota foi criada com sucesso e persistida no banco de dados dentro do volume.
 
+Demais notas criadas
+
+![Etapa 4 - Container](prints/print1.png)
+
 ---
 
 ### Etapa 5 — Persistência dos Dados
