@@ -227,6 +227,25 @@ Demais notas criadas
 
 ![Etapa 4 - Container](prints/print1.png)
 
+```json
+[
+  {
+    "data_hora": "2026-09-17T23:09:48.192960",
+    "id": 1,
+    "texto": "primeira nota"
+  },
+  {
+    "data_hora": "2026-09-17T23:10:39.722164",
+    "id": 2,
+    "texto": "segunda nota"
+  },
+  {
+    "data_hora": "2026-09-17T23:10:47.556135",
+    "id": 3,
+    "texto": "terceira nota"
+  }
+]
+```
 ---
 
 ### Etapa 5 — Persistência dos Dados
