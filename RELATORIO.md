@@ -1,8 +1,8 @@
 # RELATÓRIO — Implementação de Serviços com Docker
 
 **Disciplina:** Sistemas Operacionais  
-**Aluna:** Taylane  
-**Data:** Setembro 2026
+**Aluna:** Taylane Castelo Branco Cavalcante
+**Data:** 17/09/2026
 
 ---
 
@@ -499,9 +499,9 @@ Esse caminho está no sistema de arquivos do host (máquina onde o Docker está 
 
 ### Dificuldades encontradas
 
-Durante a realização desta atividade, enfrentei algumas dificuldades que foram importantes para o aprendizado. A principal dificuldade foi compreender a diferença fundamental entre dados armazenados dentro do container (efêmeros) e dados em volumes nomeados (persistentes). Inicialmente, tive dificuldade em entender por que os dados eram perdidos quando o container era removido, e como os volumes nomeados resolvem esse problema. Além disso, o mapeamento de portas com o flag `-p` exigiu atenção ao formato `host:container`, pois uma configuração incorreta poderia impedir o acesso à aplicação. O uso de variáveis de ambiente como `DATA_DIR` também representou um desafio, pois era necessário garantir que o diretório existisse antes da inicialização da aplicação.
+Durante a realização desta atividade, enfrentei algumas dificuldades que foram importantes para o aprendizado. A principal dificuldade foi compreender a diferença entre dados armazenados dentro do container, os efêmeros, e dados em volumes nomeados, os persistentes Inicialmente, tive dificuldade em entender por que os dados eram perdidos quando o container era removido, e como os volumes nomeados resolvem esse problema. Além disso, o mapeamento de portas com o flag `-p` exigiu atenção ao formato `host:container`, pois uma configuração incorreta poderia impedir o acesso à aplicação. O uso de variáveis de ambiente como `DATA_DIR` também representou um desafio, pois era necessário garantir que o diretório existisse antes da inicialização da aplicação.
 
 ### Aprendizados
 
-Esta atividade me permitiu consolidar conhecimentos importantes sobre Docker e desenvolvimento de aplicações containerizadas. Aprendi que **Docker Volumes** são essenciais para dados persistentes — sem eles, dados são perdidos a cada remoção de container. Também compreendi a importância de construir o **Dockerfile** com camadas otimizadas, copiando dependências antes do código fonte para aproveitar o cache do Docker. A combinação **Flask + SQLite + Docker Volume** demonstrou ser uma solução simples e eficaz para protótipos e aplicações de pequena escala. Além disso, os comandos `docker volume inspect` e `docker history` são ferramentas valiosas para entender a estrutura e o funcionamento interno das imagens e volumes Docker. Por fim, aprendi que a documentação detalhada de cada etapa é fundamental para reter o conhecimento e facilitar futuras referências.
+Esta atividade me permitiu consolidar conhecimentos importantes sobre Docker e desenvolvimento de aplicações containerizadas. Aprendi que Docker Volumes são essenciais para dados persistentes, pois sem eles, dados são perdidos a cada remoção de container. Também compreendi a importância de construir o Dockerfile com camadas otimizadas, copiando dependências antes do código fonte para aproveitar o cache do Docker. A combinação Flask + SQLite + Docker Volume demonstrou ser uma solução simples e eficaz para protótipos e aplicações de pequena escala. Além disso, os comandos `docker volume inspect` e `docker history` são ferramentas valiosas para entender a estrutura e o funcionamento interno das imagens e volumes Docker. Por fim, aprendi que a documentação detalhada de cada etapa é fundamental para reter o conhecimento e facilitar futuras referências.
 
