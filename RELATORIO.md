@@ -465,69 +465,37 @@ docker volume rm notas-dados
 
 ## 6. Respostas às Perguntas da Etapa 7
 
-### Pergunta 1: O que acontece quando usamos `docker volume inspect`?
-
-**Resposta:** O comando `docker volume inspect notas-dados` retorna informações detalhadas sobre o volume, incluindo:
-- **CreatedAt:** Data e hora de criação do volume
-- **Driver:** Driver utilizado (local)
-- **Mountpoint:** Caminho físico onde os dados são armazenados no sistema host (`/var/lib/docker/volumes/notas-dados/_data`)
-- **Name:** Nome do volume
-- **Scope:** Escopo (local)
-
-Isso permite verificar exatamente onde o Docker está armazenando os dados fisicamente.
-
-### Pergunta 2: Qual o conteúdo do diretório `/app/data` dentro do container?
-
-**Resposta:** O diretório `/app/data` contém o arquivo `notas.db`, que é o banco de dados SQLite. Esse arquivo é persistido através do volume nomeado `notas-dados`, garantindo que os dados não sejam perdidos quando o container é removido.
-
-### Pergunta 3: Onde o Docker armazena fisicamente os dados do volume?
+### Pergunta 1: Onde o Docker armazena fisicamente os dados do volume? (docker volume inspect)
 
 **Resposta:** O Docker armazena os dados fisicamente em:
 ```
 /var/lib/docker/volumes/notas-dados/_data/notas.db
 ```
 
+![Etapa 7 - Volume Inspect](prints/print7.png)
+
 Esse caminho está no sistema de arquivos do host (máquina onde o Docker está instalado), não dentro do container. É por isso que os dados persistem mesmo após a remoção do container.
 
-### Pergunta 4: O que acontece ao remover o volume com `docker volume rm`?
+
+### Pergunta 2: Qual o conteúdo do diretório `/app/data` dentro do container?
+
+**Resposta:** O diretório `/app/data` contém o arquivo `notas.db`, que é o banco de dados SQLite. Esse arquivo é persistido através do volume nomeado `notas-dados`, garantindo que os dados não sejam perdidos quando o container é removido.
+
+![Etapa 7 - Diretório](prints/print8.png)
+
+
+### Pergunta 3: O que acontece ao remover o volume com `docker volume rm`?
 
 **Resposta:** O comando `docker volume rm notas-dados` remove permanentemente o volume e todos os dados nele contidos. Após a remoção:
 - Qualquer novo container criado com `-v notas-dados:/app/data` criará um volume vazio
 - O banco de dados será reinicializado
 - Todos os dados anteriores serão perdidos
 
-> ⚠️ **Importante:** Esta operação é irreversível. Só deve ser executada se houver certeza de que os dados não são mais necessários.
-
-### Pergunta 5: Por que é importante usar volumes nomeados?
-
-**Resposta:** Volumes nomeados são importantes porque:
-1. **Persistência de dados:** Os dados permanecem mesmo após a remoção do container
-2. **Compartilhamento:** Vários containers podem compartilhar o mesmo volume
-3. **Backup:** Facilita a cópia e restauração de dados
-4. **Desacoplamento:** Separa os dados do ciclo de vida dos containers
-5. **Performance:** Volumes nomeados geralmente têm melhor performance que volumes anônimos
+![Etapa 7 - Remoção](prints/print10.png)
 
 ---
 
-## 7. Resumo dos Comandos Utilizados
-
-| Comando | Descrição |
-|---------|-----------|
-| `docker build -t notas-api:1.0 .` | Constrói a imagem Docker a partir do Dockerfile |
-| `docker run -d --name notas-container -p 8000:8000 -v notas-dados:/app/data notas-api:1.0` | Executa o container com volume nomeado |
-| `docker ps` | Lista containers em execução |
-| `docker logs notas-container` | Exibe logs do container |
-| `docker stop notas-container` | Para a execução do container |
-| `docker rm notas-container` | Remove o container |
-| `docker history notas-api:1.0` | Visualiza as camadas da imagem |
-| `docker volume inspect notas-dados` | Inspeciona detalhes do volume |
-| `docker volume rm notas-dados` | Remove o volume |
-| `docker exec notas-container2 ls -la /app/data` | Lista arquivos no diretório de dados |
-| `docker exec notas-container2 sqlite3 ...` | Consulta o banco de dados diretamente |
-
----
-
-## 8. Dificuldades e Aprendizados
+## 7. Dificuldades e Aprendizados
 
 ### Dificuldades encontradas
 
@@ -537,13 +505,3 @@ Durante a realização desta atividade, enfrentei algumas dificuldades que foram
 
 Esta atividade me permitiu consolidar conhecimentos importantes sobre Docker e desenvolvimento de aplicações containerizadas. Aprendi que **Docker Volumes** são essenciais para dados persistentes — sem eles, dados são perdidos a cada remoção de container. Também compreendi a importância de construir o **Dockerfile** com camadas otimizadas, copiando dependências antes do código fonte para aproveitar o cache do Docker. A combinação **Flask + SQLite + Docker Volume** demonstrou ser uma solução simples e eficaz para protótipos e aplicações de pequena escala. Além disso, os comandos `docker volume inspect` e `docker history` são ferramentas valiosas para entender a estrutura e o funcionamento interno das imagens e volumes Docker. Por fim, aprendi que a documentação detalhada de cada etapa é fundamental para reter o conhecimento e facilitar futuras referências.
 
----
-
-## 9. Referências
-
-1. Docker Docs — Volumes: https://docs.docker.com/storage/volumes/
-2. Docker Docs — Dockerfile reference: https://docs.docker.com/engine/reference/builder/
-3. Flask Documentation: https://flask.palletsprojects.com/
-4. SQLite Documentation: https://www.sqlite.org/docs.html
-5. Docker — Get Started: https://docs.docker.com/get-started/
-6. Python 3.12 Documentation: https://docs.python.org/3/
