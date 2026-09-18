@@ -136,13 +136,15 @@ docker build -t notas-api:1.0 .
  => => naming to docker.io/library/notas-api:1.0
 ```
 
-**Print da Etapa 3:**
+**Print da Etapa 3 (listagem da imagem):**
 
-![Etapa 3 - Docker Build](prints/print3.png)
+![Etapa 3 - Docker Image LS](prints/print3.png)
 
 **Explicação:**
 
-O comando `docker build` constrói a imagem Docker a partir do Dockerfile. A flag `-t notas-api:1.0` nomeia e versiona a imagem. Cada linha do Dockerfile gera uma camada (layer) na imagem.
+O comando `docker build -t notas-api:1.0 .` constrói a imagem Docker a partir do Dockerfile. A flag `-t notas-api:1.0` nomeia e versiona a imagem. Cada linha do Dockerfile gera uma camada (layer) na imagem.
+
+Após a construção, o comando `docker image ls notas-api` confirma que a imagem foi criada com sucesso, mostrando seu ID, tamanho (51.2MB) e outras informações.
 
 **Visualização das camadas:**
 
@@ -289,9 +291,13 @@ curl http://localhost:8000/notas
 ]
 ```
 
-**Print da Etapa 5:**
+**Print da Etapa 5 (verificação dos logs):**
 
-![Etapa 5 - Persistência](prints/print7.png)
+![Etapa 5 - Logs do Container](prints/print6.png)
+
+**Print da Etapa 5 (notas persistidas):**
+
+![Etapa 5 - Notas Persistidas](prints/print1.png)
 
 **Resultado:**
 
@@ -424,9 +430,10 @@ drwxr-xr-x 3 root     root     4096 set 17 13:38 ..
 -rw-r--r-- 1 taylanne taylanne 8192 set 17 13:40 notas.db
 ```
 
-**Print da Etapa 7 (localização física):**
-
-![Etapa 7 - Localização Física](prints/print11.png)
+**Observação:** A localização física dos dados pode ser vista no output do `docker volume inspect` (print 7.1), onde o campo `Mountpoint` mostra:
+```
+/var/snap/docker/common/var-lib-docker/volumes/notas-dados/_data
+```
 
 #### 7.4 Conteúdo do banco de dados
 
@@ -442,9 +449,7 @@ docker exec notas-container2 sqlite3 /app/data/notas.db "SELECT * FROM notas;"
 1|Minha primeira nota|2026-09-17T13:40:00.123456
 ```
 
-**Print da Etapa 7 (banco de dados):**
-
-![Etapa 7 - Banco de Dados](prints/print12.png)
+**Observação:** O conteúdo do banco de dados confirma que a nota foi persistida corretamente no volume.
 
 #### 7.5 Remoção do volume
 
@@ -458,7 +463,7 @@ docker volume rm notas-dados
 
 **Print da Etapa 7 (remoção):**
 
-![Etapa 7 - Remoção](prints/print13.png)
+![Etapa 7 - Remoção](prints/print10.png)
 
 ---
 
