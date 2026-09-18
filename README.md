@@ -2,7 +2,6 @@
 
 **Disciplina:** Sistemas Operacionais  
 **Aluna:** Taylane Castelo Branco Cavalcante
-
 **Data:** 17/09/2026
 
 API de anotações desenvolvida em Python com Flask e SQLite.
