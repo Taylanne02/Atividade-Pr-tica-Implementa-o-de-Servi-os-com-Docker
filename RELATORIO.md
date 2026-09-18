@@ -352,7 +352,7 @@ curl http://localhost:8001/notas
 
 **Print da Etapa 6 (contraexemplo):**
 
-![Etapa 6 - Contraexemplo](prints/print10.png)
+![Etapa 6 - Contraexemplo](prints/print14.png)
 
 **Resultado:**
 
@@ -450,10 +450,6 @@ docker exec notas-container2 sqlite3 /app/data/notas.db "SELECT * FROM notas;"
 ```
 
 **Observação:** O conteúdo do banco de dados confirma que a nota foi persistida corretamente no volume.
-
-#### 7.5 Remoção do volume
-
-> ⚠️ **Atenção:** esta operação remove permanentemente o volume e todos os dados nele contidos.
 
 **Comando:**
 
